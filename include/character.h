@@ -38,9 +38,13 @@ class Character {
   void setMoney(int);
 
   //Functions
+  void showStatus();
   void battle();
-  void lvl_up();
-  int attack();
+  virtual void lvl_up();
+  virtual int attack();
+  virtual void equip(Equip);
+  virtual void equip();
+  virtual int equipPrice();
   
   private:
     std::string name;

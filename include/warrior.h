@@ -11,7 +11,7 @@
 class Warrior : public Character{
   public:    
     //constructors and destructors.
-    Warrior(std::string,int,int,int,int,int,int,int,int,std::vector<Equip>,std::list<Equip>);
+    Warrior(std::string,int,int,int,int,int,int,int,int,Equip,std::list<Equip>);
     Warrior();
     ~Warrior();
     
@@ -20,10 +20,13 @@ class Warrior : public Character{
 
     //Functions
     void lvl_up();
-    int attack(int);
+    int attack();
+    void equip(Equip);
+    void equip();
+    int equipPrice();
   
   private:
-    std::vector<Equip> equiped;
+    Equip equiped;
     std::list<Equip> inventory;
     int const label = 0;
 };

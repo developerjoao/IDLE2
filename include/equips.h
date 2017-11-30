@@ -9,26 +9,25 @@ class Equip {
   
   //Constructors and Destructor
     Equip();
-    Equip(std::string,int,int);
+    Equip(std::string,std::string,int,int);
     ~Equip();
   
   //Getters
   std::string const& getName() const;
+  std::string const& getType() const;
   int const& getAtk() const;
-  int const& getDef() const;
-  
+  int const& getPreco() const;
+
   //Setters
   void setName(std::string);
   void setAtk(int);
-  void setDef(int);
-  
-  //functions
-  //void refine();
   
   private:
-    std::string name;
+    std::string name,
+                type;
     int atk,
-        def;
+        preco;
+
 };
 
 #endif /* EQUIPS */

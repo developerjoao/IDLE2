@@ -128,16 +128,45 @@
   }
 
   //Functions
- void Character::lvl_up(){
-    this->setNext_lvl(2*this->getNext_lvl());
+  void Character::showStatus(){
+    string opcao;
+    bool retorno = true;
+    cout<<"Nome: "<<this->getName()<<endl;
+    cout<<"Lvl: "<<this->getLvl()<<endl;
+    cout<<"Hp: "<<this->getHp()<<endl;
+    cout<<"Strengh: "<<this->getStr()<<endl;
+    cout<<"Dexterity: "<<this->getDex()<<endl;
+    cout<<"Wisdom: "<<this->getWis()<<endl;
+    cout<<"Exp: "<<this->getExp()<<endl;
+    cout<<"Money: "<<this->getMoney()<<endl;
+    cout<<"Para voltar a cidade entre qualquer tecla:";
+    cin>>opcao;
+    system("clear");
+  }
+
+  void Character::lvl_up(){
+    //this->setNext_lvl(2*this->getNext_lvl());
   }
 
   int Character::attack(){
-    return this->str;
+
+  }
+
+  void Character::equip(Equip){
+
+  }
+
+  void Character::equip(){
+
+  }
+
+  int Character::equipPrice(){
+
   }
 
   void Character::battle() {
     srand(time(NULL));
+    bool stop;
     string opcao;
     Monster monstroAndar;
     monstroAndar.ranMonster(monstroAndar); 
@@ -155,8 +184,9 @@
       cout<<"HP " <<monstroAndar.getMonName()<<":"<<HpOponente<<endl;
       cout<<endl;
       if((rand() % 20 + 1) + getDex() >= monstroAndar.getMonDef()){ 
-        cout << "Voce acertou o "<<monstroAndar.getMonName()<<", causando " << attack() << " pontos de dano!"<<endl;
-        HpOponente -= attack();
+        int dano = attack();
+        cout << "Voce acertou o "<<monstroAndar.getMonName()<<", causando " << dano << " pontos de dano!"<<endl;
+        HpOponente -= dano;
         }else{
         cout << "Voce errou seu ataque."<<endl;
       }
@@ -164,12 +194,11 @@
         setExp(getExp()+monstroAndar.getMonExp());
         cout << "Voce venceu o combate!"<<endl;
         cout << "Exp atual:"<<this->getExp()<<endl;
+        this->setMoney(this->getMoney()+monstroAndar.getMonLoot());
         cout<<endl;
         if(this->getExp()>=this->getNext_lvl()){
           this->lvl_up();
-          this->setLvl(this->getLvl()+1);
           cout<<"Parabéns, você subiu para o nivel "<<this->getLvl()<<"!"<<endl;
-          this->setExp(0);
           cout<<"Deseja voltar a cidade?(s/n)";
           cin>>opcao;
           if(opcao == "s" or opcao == "S"){
@@ -187,13 +216,15 @@
       usleep(1000*1000);
       if(!(HpOponente <= 0)){
         cout << monstroAndar.getMonName() << " acertou um ataque em voce, causando " << monstroAndar.getMonAtk() << " de dano."<<endl;
+        cout<<endl;
         HpJogador -= monstroAndar.getMonAtk();
         /*cout<<"HP jogador:"<<HpJogador<<endl;
         cout<<"HP " <<monstroAndar.getMonName()<<":"<<HpOponente<<endl;*/
       }
       if(HpJogador <= 0){
+        cout << "Voce foi derrotado! Entre qualquer tecla para voltar para a cidade!"<<endl;
+        cin>>opcao;
         system("clear");
-        cout << "Voce foi derrotado!"<<endl;
         return;
         //cabou++;
       }

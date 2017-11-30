@@ -11,7 +11,7 @@
 class Thief : public Character{
   public:    
     //constructors and destructors.
-    Thief(std::string,int,int,int,int,int,int,int,int,std::vector<Equip>,std::list<Equip>);
+    Thief(std::string,int,int,int,int,int,int,int,int,Equip,std::list<Equip>);
     // Warlock();
     ~Thief();
     
@@ -20,9 +20,13 @@ class Thief : public Character{
   
     //Functions
     void lvl_up();
-    int attack(int);
+    int attack();
+    void equip(Equip);
+    void equip();
+    int equipPrice();
+    
   private:
-    std::vector<Equip> equiped;
+    Equip equiped;
     std::list<Equip> inventory;
     int const label = 2;
 };

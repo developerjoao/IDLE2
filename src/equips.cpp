@@ -3,10 +3,11 @@
     //Constructors and Destructor
     Equip::Equip() = default;
     
-    Equip::Equip(std::string name,int atk,int def){
+    Equip::Equip(std::string name,std::string type,int atk, int preco){
       this->name = name;
+      this->type = type;
       this->atk = atk;
-      this->def = def;
+      this->preco = preco;
     }
 
     Equip::~Equip() = default;
@@ -15,12 +16,16 @@
   std::string const& Equip::getName() const{
       return this->name;
   }
+  std::string const& Equip::getType() const{
+      return this->type;
+  }
+
   int const& Equip::getAtk() const{
       return this->atk;
   }
 
-  int const& Equip::getDef() const{
-      return this->def;
+  int const& Equip::getPreco() const{
+      return this->preco;
   }
 
   //Setters
@@ -30,8 +35,4 @@
 
   void Equip::setAtk(int atk){
     this->atk = atk;
-  }
-
-  void Equip::setDef(int def){
-    this->def = def;
   }
