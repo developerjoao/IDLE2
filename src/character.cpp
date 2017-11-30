@@ -187,6 +187,7 @@
       usleep(1000*1000);
       if(!(HpOponente <= 0)){
         cout << monstroAndar.getMonName() << " acertou um ataque em voce, causando " << monstroAndar.getMonAtk() << " de dano."<<endl;
+        cout<<endl;
         HpJogador -= monstroAndar.getMonAtk();
         /*cout<<"HP jogador:"<<HpJogador<<endl;
         cout<<"HP " <<monstroAndar.getMonName()<<":"<<HpOponente<<endl;*/
