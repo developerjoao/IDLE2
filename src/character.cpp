@@ -128,7 +128,22 @@
   }
 
   //Functions
- void Character::lvl_up(){
+  void Character::showStatus(){
+    string opcao;
+    bool retorno = true;
+    cout<<"Nome: "<<this->getName()<<endl;
+    cout<<"Lvl: "<<this->getLvl()<<endl;
+    cout<<"Hp: "<<this->getHp()<<endl;
+    cout<<"Strengh: "<<this->getStr()<<endl;
+    cout<<"Dexterity: "<<this->getDex()<<endl;
+    cout<<"Wisdom: "<<this->getWis()<<endl;
+    cout<<"Exp: "<<this->getExp()<<endl;
+    cout<<"Para voltar a cidade entre qualquer tecla:";
+    cin>>opcao;
+    system("clear");
+  }
+
+  void Character::lvl_up(){
     this->setNext_lvl(2*this->getNext_lvl());
   }
 
@@ -166,10 +181,10 @@
         cout << "Exp atual:"<<this->getExp()<<endl;
         cout<<endl;
         if(this->getExp()>=this->getNext_lvl()){
+          this->setExp(this->getExp()-this->getNext_lvl());
           this->lvl_up();
           this->setLvl(this->getLvl()+1);
           cout<<"Parabéns, você subiu para o nivel "<<this->getLvl()<<"!"<<endl;
-          this->setExp(0);
           cout<<"Deseja voltar a cidade?(s/n)";
           cin>>opcao;
           if(opcao == "s" or opcao == "S"){
