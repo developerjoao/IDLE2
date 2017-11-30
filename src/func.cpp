@@ -62,6 +62,7 @@ void intro(){
 						player = new Thief(username,100,15,15,10,0,1,100,0,new_vector,new_list);
 						laco = false;
 					}
+					system("clear");
 				}
 				
 			} else if(option.compare("n") == 0 or option.compare("N") == 0){
@@ -104,7 +105,7 @@ bool game(Character* player){
 	while(laco){
 		cout << "Bem vindo, "<<player->getName()<<", a cidade de Crystal Water! Lar da dungeon infinita!" << endl;
 		cout << "[1] Enfrentar a dungeon." << endl;
-		cout << "[2] Ir ao inventario.(Em breve)" << endl;
+		cout << "[2] Mostrar status" << endl;
 		cout << "[3] Salvar o jogo." << endl;
 		cout << "[4] Voltar ao menu inicial." << endl;
 		cout << "[5] Sair do jogo." << endl;
@@ -118,6 +119,8 @@ bool game(Character* player){
 			
 		} else if(num == 2){
 			//menu(player);
+			system("clear");
+			player->showStatus();
 		
 		} else if(num == 3){
 			save_game(player);
