@@ -38,6 +38,7 @@ class Character {
   void setMoney(int);
 
   //Functions
+  void showStatus();
   void battle();
   void lvl_up();
   int attack();
