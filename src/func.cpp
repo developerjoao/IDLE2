@@ -11,10 +11,26 @@ void display(){
 	cout <<"                                  ▀▀▀  █   ██                     █   ██\033[39m" << endl;
 	cout << endl;
 }
+//**********************************************Load Game******************************************
+vector<string> Load(ifstream& savefile){
+    vector<string> personagem;
+    string atributo;
+    if(savefile){
+      while(getline(savefile, atributo, ';')){
+        if(!savefile.eof()){
+        	cout <<"Aqui" << endl;
+            personagem.push_back(atributo);
+          }
+        }
+    }
+    personagem.push_back(atributo);
+    return personagem;
+}
 
 //**********************************************Menu principal*************************************
 void intro(){
 	string username, aux, option;
+	vector<string> personagem;
 	int num;
 	bool laco = true;
 	Character* player;
@@ -29,8 +45,20 @@ void intro(){
 	ifstream savefile(aux, ifstream::in);
 	
 	if(savefile.is_open()){
-		//cout<<system("clear");
-		//carregar se já existir
+		personagem = Load(savefile);
+		//Novo personagem
+		list<Equip> new_list;
+		vector<Equip> new_vector;
+		if(stoi(personagem[0]) == 1){
+			player = new Warrior(personagem[1],stoi(personagem[2]),stoi(personagem[3]),stoi(personagem[4]),stoi(personagem[5]),stoi(personagem[6]),stoi(personagem[7]),stoi(personagem[8]),stoi(personagem[9]),new_vector,new_list);
+			laco = false;
+		} else if(stoi(personagem[0]) == 2){
+			player = new Warlock(personagem[1],stoi(personagem[2]),stoi(personagem[3]),stoi(personagem[4]),stoi(personagem[5]),stoi(personagem[6]),stoi(personagem[7]),stoi(personagem[8]),stoi(personagem[9]),new_vector,new_list);
+			laco = false;
+		} else {
+			player = new Thief(personagem[1],stoi(personagem[2]),stoi(personagem[3]),stoi(personagem[4]),stoi(personagem[5]),stoi(personagem[6]),stoi(personagem[7]),stoi(personagem[8]),stoi(personagem[9]),new_vector,new_list);
+			laco = false;
+		}		
 		savefile.close();
 	}else{
 		while(laco){
@@ -66,6 +94,7 @@ void intro(){
 				
 			} else if(option.compare("n") == 0 or option.compare("N") == 0){
 				cout << "Fim de jogo!" << endl;
+				player->setHp(-999999);
 				laco = false;
 				
 			} else {
@@ -75,6 +104,7 @@ void intro(){
 			}
 		}
 	}
+	if(player->getHp() != -999999)
 	game(player);
 	
 }
@@ -86,7 +116,7 @@ void save_game(Character* player){
 	//É só concatenar todas as informações do personagem nesse padrão aí
 	//Que já tá escrevendo no arquivo bonitinho! O problema tá no label... acho melhor que durante a criação o personagem tenha
 	//Uma string classe para identifica-lá!
-	save = to_string(player->getLabel())+";" +player->getName()+ ";" +to_string(player->getHp())+ ";" +to_string(player->getStr())+ ";" +to_string(player->getDex())+ ";" +to_string(player->getWis())+ ";" +to_string(player->getExp())+ ";" +to_string(player->getLvl())+ ";" +to_string(player->getNext_lvl())+ ";" +to_string(player->getMoney());
+	save = to_string(player->getLabel())+";" +player->getName()+ ";" +to_string(player->getHp())+ ";" +to_string(player->getStr())+ ";" +to_string(player->getDex())+ ";" +to_string(player->getWis())+ ";" +to_string(player->getExp())+ ";" +to_string(player->getLvl())+ ";" +to_string(player->getNext_lvl())+ ";" +to_string(player->getMoney())+ ";";
 	ofstream outfile;
 	outfile.open(aux);
 	if(outfile.is_open()){
@@ -96,6 +126,7 @@ void save_game(Character* player){
 	outfile.close();
 }
 //**********************************************Fim do Save****************************************
+
 //**********************************************Inicio do jogo*************************************
 bool game(Character* player){
 	int num;
@@ -148,4 +179,5 @@ bool game(Character* player){
 	return false;
 }
 
+//**********************************************Fim do jogo****************************************
 //**********************************************Fim do jogo****************************************
