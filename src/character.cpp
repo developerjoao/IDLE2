@@ -144,11 +144,11 @@
   }
 
   void Character::lvl_up(){
-    this->setNext_lvl(2*this->getNext_lvl());
+    //this->setNext_lvl(2*this->getNext_lvl());
   }
 
   int Character::attack(){
-    return this->str;
+
   }
 
   void Character::battle() {
@@ -170,8 +170,9 @@
       cout<<"HP " <<monstroAndar.getMonName()<<":"<<HpOponente<<endl;
       cout<<endl;
       if((rand() % 20 + 1) + getDex() >= monstroAndar.getMonDef()){ 
-        cout << "Voce acertou o "<<monstroAndar.getMonName()<<", causando " << attack() << " pontos de dano!"<<endl;
-        HpOponente -= attack();
+        int dano = attack();
+        cout << "Voce acertou o "<<monstroAndar.getMonName()<<", causando " << dano << " pontos de dano!"<<endl;
+        HpOponente -= dano;
         }else{
         cout << "Voce errou seu ataque."<<endl;
       }
@@ -181,9 +182,7 @@
         cout << "Exp atual:"<<this->getExp()<<endl;
         cout<<endl;
         if(this->getExp()>=this->getNext_lvl()){
-          this->setExp(this->getExp()-this->getNext_lvl());
           this->lvl_up();
-          this->setLvl(this->getLvl()+1);
           cout<<"Parabéns, você subiu para o nivel "<<this->getLvl()<<"!"<<endl;
           cout<<"Deseja voltar a cidade?(s/n)";
           cin>>opcao;

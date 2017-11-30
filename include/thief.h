@@ -20,7 +20,7 @@ class Thief : public Character{
   
     //Functions
     void lvl_up();
-    int attack(int);
+    int attack();
   private:
     std::vector<Equip> equiped;
     std::list<Equip> inventory;

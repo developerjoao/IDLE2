@@ -67,6 +67,7 @@ void intro(){
 				
 			} else if(option.compare("n") == 0 or option.compare("N") == 0){
 				cout << "Fim de jogo!" << endl;
+				player->setHp(-999999);
 				laco = false;
 				
 			} else {
@@ -76,7 +77,8 @@ void intro(){
 			}
 		}
 	}
-	game(player);
+	if(player->getHp()!=-999999)
+		game(player);
 	
 }
 //**********************************************Fim do menu****************************************

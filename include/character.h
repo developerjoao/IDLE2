@@ -40,8 +40,8 @@ class Character {
   //Functions
   void showStatus();
   void battle();
-  void lvl_up();
-  int attack();
+  virtual void lvl_up();
+  virtual int attack();
   
   private:
     std::string name;

@@ -17,17 +17,18 @@
 
     //Functions
     void Warrior::lvl_up(){
-
+      this->setNext_lvl(2*this->getNext_lvl());
+      this->setExp(this->getExp()-this->getNext_lvl());
+      this->setLvl(this->getLvl()+1);
+      this->setStr(this->getStr()+this->getLvl()*1);
+      this->setHp(this->getHp()+this->getLvl()*5);
     }
 
-    int Warrior::attack(int monsterDef){
+    int Warrior::attack(){
       if (rand()%100>=95){
-          return (this->equiped[0].getAtk()+getDex())*2;
+        std::cout << "CRITICAL HIT!!!" << std::endl;
+        return (getStr())*1.5;
       }else{
-        if(this->getDex()>monsterDef){
-          return this->equiped[0].getAtk()+getStr();
-        }else{
-          return 0;
-        }
-      } 
+        return getStr();
+      }
     }
